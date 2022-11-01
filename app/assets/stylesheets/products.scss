@@ -1,0 +1,27 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@charset "UTF-8";/*!
+ * Color Admin v5.1.4 (https://seantheme.com/color-admin/)
+ * Copyright 2022 SeanTheme
+ *//*!
+ * Bootstrap  v5.2.0 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+ .product{
+    background:#FFFFFF;
+    border:1px solid #ced4da;
+    border-radius:6px;
+}
+
+.product-desc {
+    padding: 20px;
+}
+
+
+.tab-content {
+    padding: 40px;
+}

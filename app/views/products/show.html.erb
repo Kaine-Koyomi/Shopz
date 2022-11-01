@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="product">
+    <p id="notice"><%= notice %></p>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <section>
+            <%= image_tag @product.photo.url, class:"product-image"%>
+          </section>
+        </div>
+        <div class="col">
+          <h2>
+            <strong><%= @product.title %></strong>
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <h1>
+            <strong><%=number_to_currency(@product.price)%></strong>
+          </h1>
+
+          <%if seller_signed_in?%>
+            <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-outline-dark mt-auto"%> 
+          <%elsif user_signed_in?%>
+            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a> 
+            <%if session[:cart].empty?|| !session[:cart].include?(@product.id.to_s)%>           
+              <%=link_to "add to cart", add_to_cart_path(@product.id), method: :post, class: "btn btn-outline-dark mt-auto"%>
+            <%end%>
+            <%session[:cart].each do |i|%>
+              <%if @product.id === i%>
+                <%=link_to "view cart", cart_show_path, class: "btn btn-outline-dark mt-auto" %>
+              <%end%>
+            <%end%>
+
+          <%else%>
+            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a>        
+            <%=link_to "add to cart", new_user_registration_path, notice: "you need an account to start a cart", class: "btn btn-outline-dark mt-auto"%>
+          <%end%>
+        </div>  
+      </div>
+    </div>
+
+    <div class="product-tab">
+
+      <ul id="product-tab" class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" href="#product-desc" data-bs-toggle="tab">Product Description</a></li>
+      <li class="nav-item"><a class="nav-link" href="#product-info" data-bs-toggle="tab">Suggestions</a></li>
+      <li class="nav-item"><a class="nav-link" href="#product-reviews" data-bs-toggle="tab">Reviews</a></li>
+      </ul>
+
+
+      <div id="product-tab-content" class="tab-content">
+
+        <div class="tab-pane fade active show" id="product-desc">
+          <div class ="product-desc">
+            <%=@product.description%>
+          </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="product-info">
+
+          <div class="table-responsive">
+
+            <section>
+              <h4>You Might Also Like</h4>
+              <div class="container text-center" >
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                  <%= render @suggested_products%>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+      </div>
+
+
+      <div class="tab-pane fade" id="product-reviews">
+
+        <div class="row row-space-30">
+
+          <div class="col-md-7 mb-4 mb-lg-0">
+
+            <div class="review">
+              <%if @product.comments.any? %>
+                <%= render @product.comments%>
+              <%else%>
+                <p>This product has no comment yet</p>
+              <%end%>
+            </div>
+
+
+            <div class="col-md-5">
+              <%if user_signed_in?%>
+                <div class="review-form">
+                  <%=form_with model: @comment, local: true do |form|%>
+                    <%= form.hidden_field :product_id, value: @product.id %>
+                    <h2>Write a review</h2>
+                    <div class="mb-3">
+                      <label for="review" class="form-label">Review <span class="text-danger">*</span></label>
+                      <%= form.text_area :body, placeholder: "Comentário", required: true, class:"form-control", id:"review"%>
+                    </div>
+                    <%= form.submit "Submit Review",class:"btn btn-dark btn-theme btn-lg"%>
+                  <%end%>
+                </div>
+              <%else%>
+                <h4>You are not logged-in, please sign-up first to give your review</h4>
+              <%end%>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="col">
+    <div class="card h-100 text-center" style="width: 18rem;">
+        <%=image_tag product.photo.url, class: "card-img-top"%>
+        <div class="card-body">
+            <h5 class="card-title"><%= product.title %></h5>
+            <p class="card-text"><%= number_to_currency(product.price)%></p>
+            <%= link_to "BUY", product, class: "btn btn-outline-dark mt-auto" %>
+        </div>
+    </div>
+</div>

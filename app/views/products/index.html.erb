@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Header-->
+            <%if seller_signed_in?%>
+            <header class="bg-danger py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">   
+                        <h1 class="display-4 fw-bolder">Shopz</h1>
+                        <p class="lead fw-normal text-white-50 mb-0">You a logged in as ADM</p>
+            <%else%>
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">
+                        <h1 class="display-4 fw-bolder">Shopz</h1>
+                        <p class="lead fw-normal text-white-50 mb-0">the perfect store for a warrior</p>
+            <%end%>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col mb-5 form-floating">
+                        <%=form_tag products_path, method: :get do%>
+                            <%=text_field_tag :search, params[:search], class: "form-control", placeholder: "search"%>
+                            <%=button_tag "search", name: nil, class: "hidden"%>
+                        <%end%>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% @products.each do |product| %>
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <%= image_tag product.photo.url, class: "card-img-top", height: "400px"%>
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder"><%=link_to product.title, product%></h5>
+                                        <!-- Product price-->
+                                        <%=number_to_currency(product.price)%>
+                                    </div>
+                                </div>
+                                    <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <%if seller_signed_in?%>
+                                            <%= link_to 'Edit', edit_product_path(product), class:"btn btn-outline-dark mt-auto"%> 
+                                        <%elsif user_signed_in?%>
+                                            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a> 
+                                            <%if session[:cart].empty?|| !session[:cart].include?(product.id.to_s)%>
+                                                <%=link_to "add to cart", add_to_cart_path(product.id), method: :post, class: "btn btn-outline-dark mt-auto"%>
+                                            <%end%>
+                                            <%session[:cart].each do |i|%>
+                                                <%if product.id === i%>
+                                                    <%=link_to "view cart", cart_show_path, class: "btn btn-outline-dark mt-auto" %>
+                                                <%end%>
+                                            <%end%>
+                                        <%else%>
+                                            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a>        
+                                            <%=link_to "add to cart", new_user_registration_path, notice: "you need an account to start a cart", class: "btn btn-outline-dark mt-auto"%>
+                                        <%end%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%end%>
+                </div>
+                <%= paginate @products%>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="product">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <section>
+            <%= image_tag @product.photo.url, width: '500'%>
+          </section>
+        </div>
+        <div class = "col">
+          <%= form_with(model: product)  do |form| %>
+            <% if product.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+                <ul>
+                  <% product.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= form.label :photo%>
+              <%= form.file_field :photo, class:"form-control form-control-lg" %>
+            </div>
+
+            <div class="field">
+              <%= form.label :title %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <div class="field mb-3">
+              <%= form.label :description %>
+              <%= form.text_area :description, class: "form-control", rows:"3" %>
+            </div>
+
+            <div class="field">
+              <%= form.label :price %>
+              <%= form.text_field :price, class: "form-control" %>
+            </div>
+          
+            <div class="actions">
+              <%= form.submit class: "btn btn-outline-dark mt-auto" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

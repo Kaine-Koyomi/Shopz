@@ -1,0 +1,12 @@
+<div class="comment">
+  <section class="body">
+    <strong><%= comment.user.email%></strong> 
+    <br>
+  </section>
+
+  <section class="created-at">
+    <p class= "comment"><%= comment.body %></p>
+    <p><%= time_ago_in_words(comment.id) %> ago</p>
+    <br>
+  </section>
+</div>
