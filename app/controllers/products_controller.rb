@@ -21,6 +21,8 @@ class ProductsController < ApplicationController
     @comment = Comment.new
     @order = Order.new
     @orders = Order.all
+    session[:visited] = params[:id]
+    @favorites = Favorite.all
   end
 
   def add_to_cart
@@ -29,6 +31,12 @@ class ProductsController < ApplicationController
     
     session[:cart] << id unless session[:cart].include?(id)
     redirect_to orders_path( product_id: id, quantity: 1)
+  end
+
+  def add_to_favorite
+    id = params[:id]
+    Favorite.where(:product_id => id, :user_id => current_user.id).destroy
+    redirect_to favorites_path(product_id: id)
   end
 
   # GET /products/new
@@ -92,6 +100,7 @@ class ProductsController < ApplicationController
 
     def initialize_session
       session[:cart] ||= []
+      session[:visited]
     end
     
     def set_list

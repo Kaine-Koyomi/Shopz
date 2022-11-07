@@ -1,0 +1,39 @@
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <h1>Favorites</h1>
+    <%if !@favorites.empty?%>
+      <%@products.each do |product|%>
+        <%@favorites.each do |favorite|%>
+          <%if product.id === favorite.product_id%>
+            <hr class="my-4">
+            <div class="row mb-4 d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <figure><%= image_tag product.photo.url, class:"img-fluid rounded-3", height: "300px"%></figure>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <h6 class="text-black mb-0"><%= link_to product.title, product %></h6>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                <h6 class="mb-0"><%=number_to_currency(product.price)%></h6>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <%= link_to favorite_path(favorite),method: :delete do%>
+                  <i class="bi bi-x"></i>
+                <%end%>
+              </div>
+            </div>
+          <%end%>
+        <%end%>
+      <%end%>
+    <%else%>
+      <div class="row mb-4 d-flex justify-content-between align-items-center">
+      </div>
+      <div class="row mb-4 d-flex justify-content-between align-items-center">
+       <h2>You don't have any favorites yet go to our store e see if you like anything</h2>
+       <%=image_tag "neco-arc-melty-blood-type-lumina.gif"%>
+      </div>
+      <div class="row mb-4 d-flex justify-content-between align-items-center">
+      </div>
+    <%end%>
+  </div>
+</section>

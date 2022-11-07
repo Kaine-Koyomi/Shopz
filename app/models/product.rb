@@ -9,8 +9,9 @@ class Product
   belongs_to :seller
   has_many :comments
   has_one :orders
+  belongs_to :favorite, optional: true
 
-  paginates_per 4
+  paginates_per 8
 
   has_mongoid_attached_file :photo
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]

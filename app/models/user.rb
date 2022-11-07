@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,7 +9,12 @@ class User
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
-
+  field :name,               type: String, default: ""
+  field :address,            type: String
+  field :phone,              type: String
+  has_mongoid_attached_file :avatar
+  
+  has_many :favorites
   has_many :comments
   has_many :orders
   ## Recoverable
@@ -36,4 +42,6 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   include Mongoid::Timestamps
+  validates :name, presence:  true 
+  validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }, styles: { small: "100x100#" }
 end

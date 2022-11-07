@@ -1,6 +1,6 @@
 <div class="col">
     <div class="card h-100 text-center" style="width: 18rem;">
-        <%=image_tag product.photo.url, class: "card-img-top"%>
+        <%=image_tag product.photo.url, class: "card-img-top", height:"300px"%>
         <div class="card-body">
             <h5 class="card-title"><%= product.title %></h5>
             <p class="card-text"><%= number_to_currency(product.price)%></p>

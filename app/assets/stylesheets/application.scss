@@ -24,7 +24,6 @@ footer {
     margin-top: -20px;
 }
 
-
 .footer-adm{
     clear: both;
     position: relative;
@@ -43,5 +42,24 @@ footer {
     .product-image {
         height: 300px;
         min-height: 25%;
+    }
+}
+
+.divider{
+    width:1px;
+    height:38px;
+    margin:5px;
+    background-color: #272a2c;
+}
+
+.div-li{
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+}
+
+@media (max-width:991.98px){
+    .divider{
+        margin:18px 5px;
     }
 }

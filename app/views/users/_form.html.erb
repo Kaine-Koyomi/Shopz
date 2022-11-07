@@ -1,0 +1,52 @@
+<%=form_with model: current_user, url: profile_path do |form|%>
+  <div class="row">
+    <div class="col-sm-3">
+      <%=form.label :avatar, class:"mb-0"%>
+    </div>
+    <div class="col-sm-9">
+      <%=form.file_field :avatar, class:"form-control form-control-lg"%>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3">
+      <%=form.label :name, class:"mb-0"%>
+    </div>
+    <div class="col-sm-9">
+      <%=form.text_field :name, placeholder: current_user.name, class:"text-muted mb-0"%>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3">
+      <%=form.label :email, class:"mb-0"%>
+    </div>
+    <div class="col-sm-9">
+      <%=form.email_field :email, placeholder: current_user.email, class:"text-muted mb-0"%>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3">
+      <%=form.label :phone, class:"mb-0"%>
+    </div>
+    <div class="col-sm-9">
+      <%=form.text_field :phone, placeholder: current_user.phone, class:"text-muted mb-0"%>
+    </div>
+  </div>
+    <hr>
+  <div class="row">
+    <div class="col-sm-3">
+      <%=form.label :address, class:"mb-0"%>
+    </div>
+    <div class="col-sm-9">
+      <%=form.text_field :address, placeholder: current_user.address, class:"text-muted mb-0"%>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+   <div class="col-sm-9">
+      <%=form.submit%>
+    </div>
+  </div>
+<%end%>

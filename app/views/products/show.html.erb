@@ -25,18 +25,18 @@
           <%if seller_signed_in?%>
             <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-outline-dark mt-auto"%> 
           <%elsif user_signed_in?%>
-            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a> 
             <%if session[:cart].empty?|| !session[:cart].include?(@product.id.to_s)%>           
               <%=link_to "add to cart", add_to_cart_path(@product.id), method: :post, class: "btn btn-outline-dark mt-auto"%>
+              <%= link_to add_to_favorite_path(@product.id), method: :post, class:"btn btn-outline-dark mt-auto" do%>
+                  <%=isfavorite(@product.id)%>
+              <%end%>
             <%end%>
             <%session[:cart].each do |i|%>
               <%if @product.id === i%>
                 <%=link_to "view cart", cart_show_path, class: "btn btn-outline-dark mt-auto" %>
               <%end%>
             <%end%>
-
-          <%else%>
-            <a class="btn btn-outline-dark mt-auto" href="#" role="button">BUY</a>        
+          <%else%>      
             <%=link_to "add to cart", new_user_registration_path, notice: "you need an account to start a cart", class: "btn btn-outline-dark mt-auto"%>
           <%end%>
         </div>  
@@ -92,8 +92,6 @@
                 <p>This product has no comment yet</p>
               <%end%>
             </div>
-
-
             <div class="col-md-5">
               <%if user_signed_in?%>
                 <div class="review-form">
