@@ -9,8 +9,6 @@ module ApplicationHelper
   end
 
   def isfavorite(id)
-    @favorites.each do |favorite|
-      favorite.product_id === id ? "salve" : "eita"
-    end
+    return Favorite.where(:product_id => id, :user_id => current_user.id).first ? '<i class="bi bi-heart-fill"></i>': '<i class="bi bi-heart"></i>'
   end
 end

@@ -54,7 +54,7 @@
                       <%= link_to 'Edit', edit_product_path(product), class:"btn btn-outline-dark mt-auto"%> 
                     <%elsif user_signed_in?%>   
                       <%= link_to add_to_favorite_path(product.id), method: :post, class:"btn btn-outline-dark mt-auto" do%>
-                        <i class="bi bi-heart"></i>
+                        <%= isfavorite(product.id).html_safe%>
                       <%end%>   
                       <%if session[:cart].empty?|| !session[:cart].include?(product.id.to_s)%>
                         <%=link_to "add to cart", add_to_cart_path(product.id), method: :post, class: "btn btn-outline-dark mt-auto"%>

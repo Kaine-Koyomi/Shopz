@@ -28,7 +28,7 @@
             <%if session[:cart].empty?|| !session[:cart].include?(@product.id.to_s)%>           
               <%=link_to "add to cart", add_to_cart_path(@product.id), method: :post, class: "btn btn-outline-dark mt-auto"%>
               <%= link_to add_to_favorite_path(@product.id), method: :post, class:"btn btn-outline-dark mt-auto" do%>
-                  <%=isfavorite(@product.id)%>
+                  <%=isfavorite(@product.id).html_safe%>
               <%end%>
             <%end%>
             <%session[:cart].each do |i|%>

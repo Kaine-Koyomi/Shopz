@@ -14,10 +14,12 @@ class ProductsController < ApplicationController
     else
       @products = Product.search(params[:search]).page params[:page]
     end
+    @favorites = Favorite.all
   end
 
   # GET /products/1 or /products/1.json
   def show
+    @products = Product.all
     @comment = Comment.new
     @order = Order.new
     @orders = Order.all
