@@ -18,9 +18,9 @@
                   <h6 class="mb-0"><%=number_to_currency(product.price)%></h6>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                  <%= link_to favorite_path(favorite),method: :delete do%>
+                  <h3><%= link_to favorite_path(favorite),method: :delete do%>
                     <i class="bi bi-x"></i>
-                  <%end%>
+                  <%end%></h3>
                 </div>
               </div>
             <%end%>
